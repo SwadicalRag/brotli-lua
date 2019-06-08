@@ -1,0 +1,16 @@
+# C
+*.o
+bin/
+buildfiles/
+**/obj/
+dist/
+**/bazel-*
+bindings.cpp
+
+# Tests
+*.txt.uncompressed
+*.br
+*.unbr
+
+# IDE
+.vscode

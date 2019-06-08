@@ -1,0 +1,8 @@
+interface BrotliDecoderResult {
+
+};
+
+namespace global {
+    int BrotliDecoderDecompress ([ArrayLength="encoded_buffer"] any encoded_size, [Const,Array] octet encoded_buffer, [Array,Size,ConvertInputArray] any decoded_size, [Array,ConvertInputArray] octet decoded_buffer);
+    boolean	BrotliEncoderCompress (int quality, int lgwin, BrotliEncoderMode mode, [ArrayLength="input_buffer"] any input_size, [Const,Array] octet input_buffer, [Array,Size,ConvertInputArray] any encoded_size, [Array,ConvertInputArray] octet encoded_buffer);
+};
