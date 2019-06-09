@@ -1,8 +1,12 @@
-interface BrotliDecoderResult {
-
+namespace BrotliEncoderMode {
+  readonly attribute int BROTLI_MODE_GENERIC;
+  /** Compression mode for UTF-8 formatted text input. */
+  readonly attribute int BROTLI_MODE_TEXT;
+  /** Compression mode used in WOFF 2.0. */
+  readonly attribute int BROTLI_MODE_FONT;
 };
 
 namespace global {
-    int BrotliDecoderDecompress ([ArrayLength="encoded_buffer"] any encoded_size, [Const,Array] octet encoded_buffer, [Array,Size,ConvertInputArray] any decoded_size, [Array,ConvertInputArray] octet decoded_buffer);
-    boolean	BrotliEncoderCompress (int quality, int lgwin, BrotliEncoderMode mode, [ArrayLength="input_buffer"] any input_size, [Const,Array] octet input_buffer, [Array,Size,ConvertInputArray] any encoded_size, [Array,ConvertInputArray] octet encoded_buffer);
+    int BrotliDecoderDecompress ([ArrayLength="encoded_buffer"] any encoded_size, [Const,Array] octet encoded_buffer, [ArrayLengthRef="decoded_buffer"] any decoded_size, [Array,ConvertInputArray] octet decoded_buffer);
+    boolean	BrotliEncoderCompress (int quality, int lgwin, [Enum="BrotliEncoderMode"] any mode, [ArrayLength="input_buffer"] any input_size, [Const,Array] octet input_buffer, [ArrayLengthRef="encoded_buffer"] any encoded_size, [Array,ConvertInputArray] octet encoded_buffer);
 };

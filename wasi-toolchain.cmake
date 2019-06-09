@@ -17,7 +17,7 @@ set(CMAKE_C_COMPILER_TARGET ${triple} CACHE STRING "wasi-sdk build")
 set(CMAKE_CXX_COMPILER_TARGET ${triple} CACHE STRING "wasi-sdk build")
 set(CMAKE_C_FLAGS "-v -fvisibility=hidden" CACHE STRING "wasi-sdk build")
 set(CMAKE_CXX_FLAGS "-v -std=c++11 -fvisibility=hidden" CACHE STRING "wasi-sdk build")
-set(CMAKE_EXE_LINKER_FLAGS "-Wl,-z,stack-size=10000000,--no-threads,--allow-undefined,--export-dynamic" CACHE STRING "wasi-sdk build")
+set(CMAKE_EXE_LINKER_FLAGS "-Wl,-z,stack-size=15728640,--no-threads,--allow-undefined,--export-dynamic" CACHE STRING "wasi-sdk build")
 
 set(CMAKE_SYSROOT ${WASI_SDK_PREFIX}/share/sysroot CACHE STRING "wasi-sdk build")
 set(CMAKE_STAGING_PREFIX ${WASI_SDK_PREFIX}/share/sysroot CACHE STRING "wasi-sdk build")

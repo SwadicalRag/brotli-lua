@@ -1,19 +1,27 @@
-local module = dofile("bin/brotli.lua")
+local module = dofile("bin/brotli.pure.lua")
 
 module.init()
 
 local function strToArr(str)
-    return {str:byte(1,-1)}
+    local out = {} for i=1,#str do out[i] = str:byte(i,i) end return out
 end
 
-local compLen,compBuf = {2000},{}
-for i=1,2000 do compBuf[i] = 0 end
-assert(module.bindings.global.BrotliEncoderCompress(1,22,0,strToArr("Hello World"),compLen,compBuf) == 1)
+local inputStr = ("Hello World"):rep(10000)
 
-local fixed = {}
-for i=1,compLen[1] do fixed[i] = compBuf[i] end
+local compBuf = {__wasmMaxLen = #inputStr * 2}
+local t = os.clock()
+assert(module.bindings.global.BrotliEncoderCompress(
+    5,
+    22,
+    module.bindings.BrotliEncoderMode.BROTLI_MODE_GENERIC,
+    strToArr(inputStr),
+    compBuf
+),"Compression failed")
+print("Compression took "..(os.clock() - t).."s")
 
-local outLen,outBuf = {2000},{}
-assert(module.bindings.global.BrotliDecoderDecompress(fixed,outLen,outBuf) == 1)
+t = os.clock()
+local outBuf = {__wasmMaxLen = #inputStr}
+assert(module.bindings.global.BrotliDecoderDecompress(compBuf,outBuf,"Decompression failed"))
+print("Decompression took "..(os.clock() - t).."s")
 
-for i=1,outLen[1] do io.write(string.char(outBuf[i])) end
+-- for i=1,outBuf.len() do io.write(string.char(outBuf[i])) end

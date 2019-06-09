@@ -6,6 +6,20 @@ cmake_minimum_required(VERSION 2.8.6)
 
 project(brotli)
 
+
+IF (NOT CMAKE_BUILD_TYPE)
+# SET(CMAKE_BUILD_TYPE "Debug")
+ SET(CMAKE_BUILD_TYPE "Release")
+ENDIF (NOT CMAKE_BUILD_TYPE)
+
+macro(remove_cxx_flag flag)
+	string(REPLACE "${flag}" "" CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE}")
+endmacro()
+
+remove_cxx_flag("-O3")
+SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Ofast")
+
+
 # If Brotli is being bundled in another project, we don't want to
 # install anything.  However, we want to let people override this, so
 # we'll use the BROTLI_BUNDLED_MODE variable to let them do that; just
