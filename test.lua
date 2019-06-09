@@ -19,6 +19,8 @@ assert(module.bindings.global.BrotliEncoderCompress(
 ),"Compression failed")
 print("Compression took "..(os.clock() - t).."s")
 
+print("Compression ratio: "..(#inputStr / compBuf.len()).."x")
+
 t = os.clock()
 local outBuf = {__wasmMaxLen = #inputStr}
 assert(module.bindings.global.BrotliDecoderDecompress(compBuf,outBuf,"Decompression failed"))
