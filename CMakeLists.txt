@@ -288,7 +288,7 @@ add_custom_command(
 add_custom_command(
 	DEPENDS brotli_lua.wasm
 	OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/bin/brotli.min.lua
-	COMMAND wasm2lua ${CMAKE_CURRENT_SOURCE_DIR}/bin/brotli_lua.wasm ${CMAKE_CURRENT_SOURCE_DIR}/bin/brotli.min.lua -b ${CMAKE_CURRENT_SOURCE_DIR}/bindings.idl --libmode --minify --jmpstreamThreshold 4000
+	COMMAND wasm2lua ${CMAKE_CURRENT_SOURCE_DIR}/bin/brotli_lua.wasm ${CMAKE_CURRENT_SOURCE_DIR}/bin/brotli.min.lua -b ${CMAKE_CURRENT_SOURCE_DIR}/bindings.idl --libmode --minify 3 --discardExportSymbols --jmpstreamThreshold 4000
 )
 
 add_custom_command(
@@ -300,7 +300,7 @@ add_custom_command(
 add_custom_command(
 	DEPENDS brotli_lua.wasm
 	OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/bin/brotli.pure.min.lua
-	COMMAND wasm2lua ${CMAKE_CURRENT_SOURCE_DIR}/bin/brotli_lua.wasm ${CMAKE_CURRENT_SOURCE_DIR}/bin/brotli.pure.min.lua -b ${CMAKE_CURRENT_SOURCE_DIR}/bindings.idl --libmode --pureLua --minify --jmpstreamThreshold 4000
+	COMMAND wasm2lua ${CMAKE_CURRENT_SOURCE_DIR}/bin/brotli_lua.wasm ${CMAKE_CURRENT_SOURCE_DIR}/bin/brotli.pure.min.lua -b ${CMAKE_CURRENT_SOURCE_DIR}/bindings.idl --libmode --pureLua --minify 3 --jmpstreamThreshold 4000
 )
 
 add_custom_target(brotli_lua ALL DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/bin/brotli.lua)
